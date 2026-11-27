@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% if page.title and page.title != site.title %}{{ page.title }} · {% endif %}Cellar for Confluence</title>
+    <meta name="description" content="{{ page.description | default: site.description }}" />
+    <link rel="icon" href="{{ '/assets/cellar-logo-512.png' | relative_url }}" />
+    <link rel="stylesheet" href="{{ '/assets/css/cellar.css' | relative_url }}" />
+  </head>
+  <body>
+    <header class="bar">
+      <div class="bar__inner">
+        <a class="brand" href="{{ '/' | relative_url }}" aria-label="Cellar home">
+          <svg class="brand__mark" width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 22V11a8 8 0 0 1 16 0v11Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+            <path d="M12 3.2V22M4 14h16M4 18h16M5.2 10h13.6" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.75" />
+          </svg>
+          <span class="brand__word">Cellar</span>
+          <span class="brand__tag">for Confluence</span>
+        </a>
+        <nav class="bar__nav" aria-label="Main">
+          <a href="{{ '/getting-started' | relative_url }}">Guides</a>
+          <a href="{{ '/faq' | relative_url }}">FAQ</a>
+          <a class="bar__cta" href="{{ '/support' | relative_url }}">Support</a>
+        </nav>
+      </div>
+    </header>
+
+    {% if page.url == "/" %}
+      {{ content }}
+    {% else %}
+      <div class="page">
+        <aside class="side" aria-label="Guides">
+          <p class="side__label">Guides</p>
+          <ul>
+            {% assign guides = "getting-started|Getting started,importing-and-exporting|Importing and downloading,version-history|Version history,charts|Charts,faq|FAQ and troubleshooting,support|Support,privacy-policy|Privacy policy,eula|Licence agreement,data-security|Security and data handling" | split: "," %}
+            {% for g in guides %}
+              {% assign parts = g | split: "|" %}
+              {% assign href = "/" | append: parts[0] %}
+              {% assign href_html = href | append: ".html" %}
+              <li><a href="{{ href | relative_url }}" {% if page.url == href or page.url == href_html %}aria-current="page"{% endif %}>{{ parts[1] }}</a></li>
+            {% endfor %}
+          </ul>
+        </aside>
+        <main class="doc">
+          <h1>{{ page.title }}</h1>
+          {{ content }}
+        </main>
+      </div>
+    {% endif %}
+
+    <footer class="foot">
+      <div class="foot__inner">
+        <span class="foot__brand">Cellar</span>
+        <span>Real spreadsheets in Confluence · Runs on Atlassian Forge</span>
+        <span>
+          <a href="{{ '/support' | relative_url }}">Support</a> ·
+          <a href="{{ '/privacy-policy' | relative_url }}">Privacy</a> ·
+          <a href="{{ '/eula' | relative_url }}">Licence</a> ·
+          <a href="{{ '/data-security' | relative_url }}">Security</a>
+        </span>
+      </div>
+    </footer>
+  </body>
+</html>

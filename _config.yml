@@ -1,0 +1,18 @@
+title: Cellar
+description: Real spreadsheets in Confluence that never lose your data.
+baseurl: /cellar-docs
+plugins:
+  - jekyll-relative-links
+  - jekyll-optional-front-matter
+  - jekyll-titles-from-headings
+relative_links:
+  enabled: true
+titles_from_headings:
+  strip_title: true
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+exclude:
+  - README.md
